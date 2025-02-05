@@ -43,13 +43,23 @@ with tab3:
 
         st.text("Call Back Probability - Handled Calls")
         st.write("Chance of calling back following a successful call ?")
-        pub_cb_han = st.slider("Public Call Back Probability Handled",min_value=0,max_value=1,value=0.01, step=0.01)
+        pub_cb_han = st.slider(
+                                "Public Call Back Probability Handled",
+                                min_value=0.0,    # float
+                                max_value=1.0,    # float
+                                value=0.01,       # float
+                                step=0.01         # float
+                            )
  
         st.text("Call Back Probability - Abandoned Calls")
         st.write("Chance of calling back following an unsuccessful call ?")
-        pub_cb_abd = st.slider("Public Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
-
-
+        pub_cb_abd = st.slider(
+                                "Public Call Back Probability Abandoned",
+                                min_value=0.0,    # float
+                                max_value=1.0,    # float
+                                value=0.01,       # float
+                                step=0.01         # float
+                            )
     with col2:
  
         st.subheader("Professional Callers")
@@ -64,8 +74,8 @@ with tab3:
 
         st.text("Call Back Probability - Handled Calls")
         st.write("Chance of calling back following a successful call ?")
-        pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01,step=0.01)
+   #     pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01,step=0.01)
  
         st.text("Call Back Probability - Abandoned Calls")
         st.write("Chance of calling back following an unsuccessful call ?")
-        pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
+   #     pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
