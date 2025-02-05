@@ -43,11 +43,11 @@ with tab3:
 
         st.text("Call Back Probability - Handled Calls")
         st.write("Chance of calling back following a successful call ?")
-        pub_cb_han = st.slider("Public Call Back Probability Handled",min_value=0,max_value=1,value=0.01)
+        pub_cb_han = st.slider("Public Call Back Probability Handled",min_value=0,max_value=1,value=0.01, step=0.01)
  
         st.text("Call Back Probability - Abandoned Calls")
         st.write("Chance of calling back following an unsuccessful call ?")
-        pub_cb_abd = st.slider("Public Call Back Probability Abd",min_value=0,max_value=1,value=0.01)
+        pub_cb_abd = st.slider("Public Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
 
 
     with col2:
@@ -64,8 +64,8 @@ with tab3:
 
         st.text("Call Back Probability - Handled Calls")
         st.write("Chance of calling back following a successful call ?")
-        pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01)
+        pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01,step=0.01)
  
         st.text("Call Back Probability - Abandoned Calls")
         st.write("Chance of calling back following an unsuccessful call ?")
-        pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01)
+        pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
