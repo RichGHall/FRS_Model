@@ -22,3 +22,12 @@ with tab2:
 with tab3:
     st.header("Other Variables")
     st.write("Use this page to change other model variables, such as call length, work time, break time ect")
+    
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.write("Column 1")
+
+    with col2:
+        st.write("Column 2")
+
