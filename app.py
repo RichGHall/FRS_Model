@@ -26,7 +26,14 @@ with tab3:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.write("Column 1")
+
+       no_runs = st.slider("Number of model runs",min_value=0,max_value=500,value=1)     
+        
+
+
+
+
+
 
     with col2:
         st.write("Column 2")
