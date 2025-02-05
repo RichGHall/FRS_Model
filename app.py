@@ -22,17 +22,32 @@ with tab2:
 with tab3:
     st.header("Other Variables")
     st.write("Use this page to change other model variables, such as call length, work time, break time ect")
-    
+
+    st.subheader("No. Runs")
+    st.write("How many times will you loop through the model ?")
+    no_runs = st.slider("Number of model runs",min_value=0,max_value=500,value=1)   
+
+
     col1, col2 = st.columns(2)
 
     with col1:
-
-       no_runs = st.slider("Number of model runs",min_value=0,max_value=500,value=1)     
+        st.subheader("Public Callers")
         
+        st.text("Talk Time")
+        st.write("How long will calls last ?")
+        pub_call_len = st.slider("Call Length (minutes)",min_value=0,max_value=60,value=1)   
 
+        st.text("Write Up Time")
+        st.write("How much time is spent on post-call admin ?")
+        pub_work_len = st.slider("Call Length (minutes)",min_value=0,max_value=60,value=1)
 
-
-
+        st.text("Call Back Probability - Handled Calls")
+        st.write("Chance of calling back following a successful call ?")
+        pub_cb_han = st.slider("Call Length (minutes)",min_value=0,max_value=1,value=0.01)
+ 
+        st.text("Call Back Probability - Abandoned Calls")
+        st.write("Chance of calling back following an unsuccessful call ?")
+        pub_cb_abd = st.slider("Call Length (minutes)",min_value=0,max_value=1,value=0.01)
 
 
     with col2:
