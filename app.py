@@ -35,21 +35,37 @@ with tab3:
         
         st.text("Talk Time")
         st.write("How long will calls last ?")
-        pub_call_len = st.slider("Call Length (minutes)",min_value=0,max_value=60,value=1)   
+        pub_call_len = st.slider("Public Call Length (minutes)",min_value=0,max_value=60,value=1)   
 
         st.text("Write Up Time")
         st.write("How much time is spent on post-call admin ?")
-        pub_work_len = st.slider("Call Length (minutes)",min_value=0,max_value=60,value=1)
+        pub_work_len = st.slider("Public Work Length (minutes)",min_value=0,max_value=60,value=1)
 
         st.text("Call Back Probability - Handled Calls")
         st.write("Chance of calling back following a successful call ?")
-        pub_cb_han = st.slider("Call Length (minutes)",min_value=0,max_value=1,value=0.01)
+        pub_cb_han = st.slider("Public Call Back Probability Handled",min_value=0,max_value=1,value=0.01)
  
         st.text("Call Back Probability - Abandoned Calls")
         st.write("Chance of calling back following an unsuccessful call ?")
-        pub_cb_abd = st.slider("Call Length (minutes)",min_value=0,max_value=1,value=0.01)
+        pub_cb_abd = st.slider("Public Call Back Probability Handled",min_value=0,max_value=1,value=0.01)
 
 
     with col2:
-        st.write("Column 2")
+ 
+        st.subheader("Professional Callers")
+        
+        st.text("Talk Time")
+        st.write("How long will calls last ?")
+        pub_call_len = st.slider("Prof Call Length (minutes)",min_value=0,max_value=60,value=1)   
 
+        st.text("Write Up Time")
+        st.write("How much time is spent on post-call admin ?")
+        pub_work_len = st.slider("Prof Work Length (minutes)",min_value=0,max_value=60,value=1)
+
+        st.text("Call Back Probability - Handled Calls")
+        st.write("Chance of calling back following a successful call ?")
+        pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01)
+ 
+        st.text("Call Back Probability - Abandoned Calls")
+        st.write("Chance of calling back following an unsuccessful call ?")
+        pub_cb_abd = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01)
