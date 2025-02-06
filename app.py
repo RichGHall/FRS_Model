@@ -1,6 +1,7 @@
 import streamlit as st 
 
 
+
 st.title('111 Mental Health (Option 2) Call Centre Discrete Event Simulation Model')
 st.write('This is some blurb describing the model')
 
@@ -20,6 +21,7 @@ with tab2:
 
 
 with tab3:
+    ## description of the tab and how to use it
     st.header("Other Variables")
     st.write("Use this page to change other model variables, such as call length, work time, break time ect")
 
@@ -27,12 +29,16 @@ with tab3:
     st.write("How many times will you loop through the model ?")
     no_runs = st.slider("Number of model runs",min_value=0,max_value=500,value=1)   
 
-
+    #setup columns
     col1, col2, col3 = st.columns(3)
 
+    #column related to public caller variables
     with col1:
         st.subheader("Public Callers")
         
+
+
+        #public talk time
         st.text("Talk Time")
         st.write("How long will calls last ?")
         pub_call_len = st.slider("Public Call Length (minutes)",min_value=0,max_value=60,value=1)   
@@ -61,9 +67,11 @@ with tab3:
                                 step=0.01         # float
                             )
     
+    #left as a gap for formating purposes
     with col2:
         st.write(" ")
-    
+
+    #column related to public caller variables
     with col3:
  
         st.subheader("Professional Callers")
