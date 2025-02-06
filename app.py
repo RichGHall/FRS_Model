@@ -28,7 +28,7 @@ with tab3:
     no_runs = st.slider("Number of model runs",min_value=0,max_value=500,value=1)   
 
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.subheader("Public Callers")
@@ -60,7 +60,11 @@ with tab3:
                                 value=0.01,       # float
                                 step=0.01         # float
                             )
+    
     with col2:
+        st.write(" ")
+    
+    with col3:
  
         st.subheader("Professional Callers")
         
