@@ -33,7 +33,7 @@ with tab1:
         public_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")
                 
         public_updated = st.button("Update Public Calls")
-        edited_public_df = st.dataeditor(public_df)
+        edited_public_df = st.data_editor(public_df)
 
         if public_updated:
             #update to a new dataframe 
