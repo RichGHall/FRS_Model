@@ -24,15 +24,6 @@ from scipy.stats import erlang
 #    MODEL SETUP 
 #############
 
-## load csv files required for the model
-
-arrivals_public_df = pd.read_csv("Public_IAT.csv")
-arrivals_public_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
-
-arrivals_prof_df = pd.read_csv("Prof_IAT.csv")
-arrivals_prof_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
-
-senior_resources_df = pd.read_csv("Senior_Resources.csv")
 
 ## Lognormal classs, used to calculate distribution 
 class Lognormal:
@@ -96,12 +87,19 @@ class Erglang_dist:
             return  self.e
 
 
-
-
-
-
 # Class to store global parameter values used in the model
 class g:
+
+    ## load csv files required for the model
+
+    arrivals_public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")   
+    arrivals_public_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
+
+    arrivals_prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_IAT.csv")  
+    arrivals_prof_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
+
+    senior_resources_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Senior_Resources.csv")
+
 
     #load csv dataframes into new df 
     arrivals_public_time_dep_df = arrivals_public_df
@@ -326,11 +324,11 @@ class Model:
             else:    
                 curr_hour = int(self.env.now // 60) * 60
             
-            current_seniors = senior_resources_df.loc[senior_resources_df['t']==curr_hour, 'res'].iloc[0]            
+            current_seniors = g.senior_resources_df.loc[g.arrivals_prof_df['t']==curr_hour, 'res'].iloc[0]            
             self.seniors = simpy.Resource(self.env, capacity=current_seniors)
 
-            self.public_arr_log = arrivals_public_df.loc[arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
-            self.prof_arr_log = arrivals_prof_df.loc[arrivals_prof_df['t']==curr_hour, 'mean_iat'].iloc[0]
+            self.public_arr_log = g.arrivals_public_df.loc[g.arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
+            self.prof_arr_log = g.arrivals_prof_df.loc[g.arrivals_prof_df['t']==curr_hour, 'mean_iat'].iloc[0]
 
             
             yield self.env.timeout(60)  # Wait until the next hour
@@ -574,7 +572,7 @@ class Trial:
 
         
 
-        self.results_df.to_csv('run_results.csv', index=False, mode='w')
+    #    self.results_df.to_csv('run_results.csv', index=False, mode='w')
         
         print_df = self.results_df.groupby('Run').agg(calls=('Run','size'),
                                                       total_hang_up=('Hang Up','sum'))
@@ -604,7 +602,7 @@ class Trial:
         self.results_agg['Abd Rate'] = self.results_agg['Tot_Abd'] / self.results_agg['Count'] 
 
 
-        self.results_agg.to_csv('agg_results.csv', index=False, mode='w')
+    #    self.results_agg.to_csv('agg_results.csv', index=False, mode='w')
         
         self.results_tot = self.results_agg.groupby(['Call Type','Call Hour']).agg(
                                 Calls_min = ('Count','min'),
@@ -627,52 +625,52 @@ class Trial:
                                 Esc_Av = ('Tot_Esc','mean')                                
                                 ).reset_index()
         
-        self.results_tot.to_csv('tot_results.csv', index=False, mode='w')
+    #    self.results_tot.to_csv('tot_results.csv', index=False, mode='w')
 
         
 
         # Adding labels and title
 
-        df = self.results_tot
+      #  df = self.results_tot
         
-        df = df[df['Call Type']=='Public']
+      #  df = df[df['Call Type']=='Public']
 
-        plt.plot(df['Call Hour'].values,df['Calls_Av'].values)
+     #   plt.plot(df['Call Hour'].values,df['Calls_Av'].values)
         
-        x = df['Call Hour'].values
-        y1 = df['Calls_min'].values
-        y2 = df['Calls_max'].values
-        y3 = df['Calls_Av'].values
+     #   x = df['Call Hour'].values
+     #   y1 = df['Calls_min'].values
+     #   y2 = df['Calls_max'].values
+     #   y3 = df['Calls_Av'].values
 
         # Plot the two lines
-        plt.plot(x, y1, label='min', color='blue')
-        plt.plot(x, y2, label='max', color='blue')
-        plt.plot(x, y3, label='Average')
-        plt.xlim(0, 23) 
+     #   plt.plot(x, y1, label='min', color='blue')
+     #   plt.plot(x, y2, label='max', color='blue')
+     #   plt.plot(x, y3, label='Average')
+     #   plt.xlim(0, 23) 
 
         # Fill the area between the two lines
-        plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
+     #   plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
 
         # Adding labels and title
-        plt.xlabel('Hour')
-        plt.ylabel('Y Axis')
-        plt.title('Public Call Volumes')
-        plt.legend()
-        plt.ylim(0)
+      #  plt.xlabel('Hour')
+      #  plt.ylabel('Y Axis')
+      #  plt.title('Public Call Volumes')
+     #   plt.legend()
+     #   plt.ylim(0)
         # Display the plot
-        plt.show()
+    #    plt.show()
 
 
-        plt.figure(figsize=(8, 5))  # Set the figure size
-        plt.hist(print_df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
+      #  plt.figure(figsize=(8, 5))  # Set the figure size
+      #  plt.hist(print_df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
 
         # Add labels and title
-        plt.xlabel('Percentage Calls Abandoned')
-        plt.ylabel('Frequency')
-        plt.title('Histogram of Abandonment Rate')
+     #   plt.xlabel('Percentage Calls Abandoned')
+     #   plt.ylabel('Frequency')
+     #   plt.title('Histogram of Abandonment Rate')
 
         # Display the histogram
-        plt.show()
+     #   plt.show()
 
 
 

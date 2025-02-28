@@ -1,6 +1,12 @@
 import streamlit as st 
 import pandas as pd
-a
+from FRSModel import Trial
+from FRSModel import g 
+
+
+
+
+
 st.set_page_config(layout="wide")
 
 st.title('111 Mental Health (Option 2) Call Centre Discrete Event Simulation Model')
@@ -41,6 +47,19 @@ with tab1:
                 st.write (public_IAT.loc[index,"mean_iat"]) 
                 
                 st.write("Public Calls Updated")
+
+
+with tab4:
+    st.header("Run the Model")
+    st.write("Use the button below to run the model")
+    run_model = st.button("Run Model")
+
+    if run_model:
+        trial = Trial()
+        trial.run_trial()
+
+        agg_results = trial.agg_results    
+        st.write(agg_results)
 
 
 
