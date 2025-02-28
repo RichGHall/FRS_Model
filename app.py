@@ -33,11 +33,10 @@ with tab1:
         public_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")
                 
         public_updated = st.button("Update Public Calls")
-        
-        if public_updated:
-            #update to a new dataframe
-            edited_public_df = st.dataeditor(public_df)
+        edited_public_df = st.dataeditor(public_df)
 
+        if public_updated:
+            #update to a new dataframe 
             #run process for updating the main dataframe
             for index, row in edited_public_df.iterrows():
                 public_IAT.loc[index,"mean_iat"] = 60 / edited_public_df.loc[index,"Av Calls"]
