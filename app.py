@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 st.title('111 Mental Health (Option 2) Call Centre Discrete Event Simulation Model')
 st.write('This is some blurb describing the model')
 
-tab0, tab1, tab2, tab3, tab4 = st.tabs(["About","1, Demand", "2, Staffing", "3, Other Variables","4, Run the Model"])
+tab0, tab1, tab2, tab3, tab4 = st.tabs(["About","1, Demand", "2, Staffing", "3, Other Variables","4, Run"])
 
 
 with tab0:
@@ -50,7 +50,7 @@ with tab1:
 
 
 with tab4:
-    st.header("Run the Model")
+    st.header("Run")
     st.write("Use the button below to run the model")
     run_model = st.button("Run Model")
 
