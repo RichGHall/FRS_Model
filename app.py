@@ -1,6 +1,6 @@
 import streamlit as st 
 import pandas as pd
-
+import matplotlib.pyplot as plt
 from FRSModel import Trial
 
 
@@ -59,10 +59,121 @@ with tab4:
         with st.spinner('Simulating the call centre...'):
         
             results_df = Trial().run_trial()
+           
+           
+            results_agg = results_df.groupby(['Run', 'Call Type', 'Call Hour']).agg(
+                                Count=('Run', 'size'),
+                                Avg_Queue_Time=('Queue Time', 'mean'),
+                                Avg_Talk_Time=('Talk Time', 'mean'),
+                                Avg_Work_Time=('Work Time', 'mean'),
+                                Tot_Esc = ('Escalated', 'sum'),
+                                Tot_Abd = ('Hang Up', 'sum')                               
+                                ).reset_index()
             
-            print_df = results_df.groupby('Run').agg(calls=('Run','size'),total_hang_up=('Hang Up','sum'))
-            print_df['abd_rate']  =   (print_df['total_hang_up'] / print_df['calls']) * 100                                                                  
-                                            
+            results_agg['Abd Rate'] = results_agg['Tot_Abd'] / results_agg['Count'] 
+
+            results_tot = results_agg.groupby(['Call Type','Call Hour']).agg(
+                                Calls_min = ('Count','min'),
+                                Calls_max = ('Count','max'),
+                                Calls_Av = ('Count','mean'),       
+                                AvQ_min = ('Avg_Queue_Time','min'),
+                                AvQ_max = ('Avg_Queue_Time','max'),
+                                AvQ_Av = ('Avg_Queue_Time','mean'),       
+                                Talk_min = ('Avg_Talk_Time','min'),
+                                Talk_max = ('Avg_Talk_Time','max'),
+                                Talk_Av = ('Avg_Talk_Time','mean'),       
+                                Abd_min = ('Abd Rate','min'),
+                                Abd_max = ('Abd Rate','max'),
+                                Abd_Av = ('Abd Rate','mean'),                                
+                                Work_min = ('Avg_Work_Time','min'),
+                                Work_max = ('Avg_Work_Time','max'),
+                                Work_Av = ('Avg_Work_Time','mean'),                                
+                                Esc_min = ('Tot_Esc','min'),
+                                Esc_max = ('Tot_Esc','max'),
+                                Esc_Av = ('Tot_Esc','mean')                                
+                                ).reset_index()
+
+            print_df = results_df.groupby('Run').agg(calls=('Run','size'),
+                                                      total_hang_up=('Hang Up','sum'))
+
+            print_df['abd_rate'] =   (print_df['total_hang_up'] / print_df['calls']) * 100    
+
+
+            df = results_tot
+        
+            df = df[df['Call Type']=='Public']
+
+            plt.plot(df['Call Hour'].values,df['Calls_Av'].values)
+        
+            x = df['Call Hour'].values
+            y1 = df['Calls_min'].values
+            y2 = df['Calls_max'].values
+            y3 = df['Calls_Av'].values
+
+        # Plot the two lines
+            plt.plot(x, y1, label='min', color='blue')
+            plt.plot(x, y2, label='max', color='blue')
+            plt.plot(x, y3, label='Average')
+            plt.xlim(0, 23) 
+
+        # Fill the area between the two lines
+            plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
+
+        # Adding labels and title
+            plt.xlabel('Hour')
+            plt.ylabel('Y Axis')
+            plt.title('Public Call Volumes')
+            plt.legend()
+            plt.ylim(0)
+        # Display the plot
+            st.pyplot(plt)
+
+
+
+
+
+
+
+            plt.figure(figsize=(8, 5))  # Set the figure size
+            plt.hist(print_df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
+
+        # Add labels and title
+            plt.xlabel('Percentage Calls Abandoned')
+            plt.ylabel('Frequency')
+            plt.title('Histogram of Abandonment Rate')
+
+        # Display the histogram
+            st.pyplot(plt)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             st.dataframe(print_df)    
 
 
