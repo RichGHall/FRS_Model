@@ -103,50 +103,90 @@ with tab4:
         
             df = df[df['Call Type']=='Public']
 
-            plt.plot(df['Call Hour'].values,df['Calls_Av'].values)
+            col1, col2 = st.columns(2)
+
+
+            with col1:
+                plt.plot(df['Call Hour'].values,df['Calls_Av'].values)       
+                x = df['Call Hour'].values
+                y1 = df['Calls_min'].values
+                y2 = df['Calls_max'].values
+                y3 = df['Calls_Av'].values
+
+            # Plot the two lines
+                plt.plot(x, y1, label='min', color='blue')
+                plt.plot(x, y2, label='max', color='blue')
+                plt.plot(x, y3, label='Average')
+                plt.xlim(0, 23) 
+
+            # Fill the area between the two lines
+                plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
+
+            # Adding labels and title
+                plt.xlabel('Hour')
+                plt.ylabel('Y Axis')
+                plt.title('Public Call Volumes')
+                plt.legend()
+                plt.ylim(0)
+            # Display the plot
+                st.pyplot(plt)
+
+
+                plt.figure(figsize=(8, 5))  # Set the figure size
+                plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
+
+            # Add labels and title
+                plt.xlabel('Percentage Calls Abandoned')
+                plt.ylabel('Frequency')
+                plt.title('Histogram of Abandonment Rate')
+
+            # Display the histogram
+                st.pyplot(plt)
+
+            
+            df = results_tot
         
-            x = df['Call Hour'].values
-            y1 = df['Calls_min'].values
-            y2 = df['Calls_max'].values
-            y3 = df['Calls_Av'].values
+            df = df[df['Call Type']=='Prof']
 
-        # Plot the two lines
-            plt.plot(x, y1, label='min', color='blue')
-            plt.plot(x, y2, label='max', color='blue')
-            plt.plot(x, y3, label='Average')
-            plt.xlim(0, 23) 
+            col1, col2 = st.columns(2)
 
-        # Fill the area between the two lines
-            plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
+            with col2:
 
-        # Adding labels and title
-            plt.xlabel('Hour')
-            plt.ylabel('Y Axis')
-            plt.title('Public Call Volumes')
-            plt.legend()
-            plt.ylim(0)
-        # Display the plot
-            st.pyplot(plt)
+                plt.plot(df['Call Hour'].values,df['Calls_Av'].values)       
+                x = df['Call Hour'].values
+                y1 = df['Calls_min'].values
+                y2 = df['Calls_max'].values
+                y3 = df['Calls_Av'].values
 
+            # Plot the two lines
+                plt.plot(x, y1, label='min', color='blue')
+                plt.plot(x, y2, label='max', color='blue')
+                plt.plot(x, y3, label='Average')
+                plt.xlim(0, 23) 
 
+            # Fill the area between the two lines
+                plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
 
-
-
-
-
-            plt.figure(figsize=(8, 5))  # Set the figure size
-            plt.hist(print_df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
-
-        # Add labels and title
-            plt.xlabel('Percentage Calls Abandoned')
-            plt.ylabel('Frequency')
-            plt.title('Histogram of Abandonment Rate')
-
-        # Display the histogram
-            st.pyplot(plt)
+            # Adding labels and title
+                plt.xlabel('Hour')
+                plt.ylabel('Y Axis')
+                plt.title('Public Call Volumes')
+                plt.legend()
+                plt.ylim(0)
+            # Display the plot
+                st.pyplot(plt)
 
 
+                plt.figure(figsize=(8, 5))  # Set the figure size
+                plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
 
+            # Add labels and title
+                plt.xlabel('Percentage Calls Abandoned')
+                plt.ylabel('Frequency')
+                plt.title('Histogram of Abandonment Rate')
+
+            # Display the histogram
+                st.pyplot(plt)
 
 
 
