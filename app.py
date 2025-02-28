@@ -132,13 +132,13 @@ with tab4:
                 st.pyplot(plt)
 
 
-                plt.figure(figsize=(8, 5))  # Set the figure size
-                plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
+            #    plt.figure(figsize=(8, 5))  # Set the figure size
+            #    plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
 
             # Add labels and title
-                plt.xlabel('Percentage Calls Abandoned')
-                plt.ylabel('Frequency')
-                plt.title('Histogram of Abandonment Rate')
+            #    plt.xlabel('Percentage Calls Abandoned')
+            #    plt.ylabel('Frequency')
+            #    plt.title('Histogram of Abandonment Rate')
 
             # Display the histogram
                 st.pyplot(plt)
@@ -177,16 +177,16 @@ with tab4:
                 st.pyplot(plt)
 
 
-                plt.figure(figsize=(8, 5))  # Set the figure size
-                plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
+            #    plt.figure(figsize=(8, 5))  # Set the figure size
+             #   plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
 
             # Add labels and title
-                plt.xlabel('Percentage Calls Abandoned')
-                plt.ylabel('Frequency')
-                plt.title('Histogram of Abandonment Rate')
+            #    plt.xlabel('Percentage Calls Abandoned')
+            #    plt.ylabel('Frequency')
+             #   plt.title('Histogram of Abandonment Rate')
 
             # Display the histogram
-                st.pyplot(plt)
+            #    st.pyplot(plt)
 
 
 
