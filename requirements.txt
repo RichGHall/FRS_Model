@@ -2,3 +2,5 @@ simpy
 pandas
 matplotlib
 streamlit
+sim_tools
+scipy
