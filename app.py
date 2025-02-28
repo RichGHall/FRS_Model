@@ -42,6 +42,8 @@ with tab1:
             for index, row in edited_public_df.iterrows():
                 public_IAT.loc[index,"mean_iat"] = 60 / edited_public_df.loc[index,"Average Calls"]
                 public_df.loc[index,"Average Calls"] = edited_public_df.loc[index,"Average Calls"]
+                st.write (public_IAT.loc[index,"mean_iat"]) 
+
 
             public_IAT.to_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv",index=False)
             edited_public_df.to_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv",index=False)
