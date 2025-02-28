@@ -29,8 +29,8 @@ with tab1:
     with col1:
         st.subheader("Public Callers")
 
-        public_df = pd.read_csv("https://github.com/RichGHall/FRS_Model/tree/main/files/Public_Av_Calls.csv")
-        public_IAT = pd.read_csv("https://github.com/RichGHall/FRS_Model/tree/main/files/Public_Av_Calls.csv")
+        public_df = pd.read_csv("https://github.com/RichGHall/FRS_Model/files/Public_Av_Calls.csv")
+        public_IAT = pd.read_csv("https://github.com/RichGHall/FRS_Model/files/Public_Av_Calls.csv")
                 
         public_updated = st.button("Update Public Calls")
         
