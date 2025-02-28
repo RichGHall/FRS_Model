@@ -141,22 +141,16 @@ with tab4:
             #    plt.title('Histogram of Abandonment Rate')
 
             # Display the histogram
-                st.pyplot(plt)
-
-            
-            df = results_tot
-        
-            df = df[df['Call Type']=='Prof']
-
-            col1, col2 = st.columns(2)
-
+            #    st.pyplot(plt)           
+          
+                
             with col2:
-
-                plt.plot(df['Call Hour'].values,df['Calls_Av'].values)       
-                x = df['Call Hour'].values
-                y1 = df['Calls_min'].values
-                y2 = df['Calls_max'].values
-                y3 = df['Calls_Av'].values
+                df_prof = results_tot[results_tot['Call Type']=='Prof']
+                plt.plot(df_prof['Call Hour'].values,df_prof['Calls_Av'].values)       
+                x = df_prof['Call Hour'].values
+                y1 = df_prof['Calls_min'].values
+                y2 = df_prof['Calls_max'].values
+                y3 = df_prof['Calls_Av'].values
 
             # Plot the two lines
                 plt.plot(x, y1, label='min', color='blue')
