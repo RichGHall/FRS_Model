@@ -1,7 +1,7 @@
 import streamlit as st 
 import pandas as pd
 from FRSModel import Trial
-from FRSModel import g 
+
 
 
 
