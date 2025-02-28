@@ -570,6 +570,14 @@ class Trial:
             model.env.run(until=g.sim_duration)
             self.results_df = pd.concat([self.results_df, model.results_df])
 
+
+
+        return self.results_df
+
+
+
+
+
         
 
     #    self.results_df.to_csv('run_results.csv', index=False, mode='w')

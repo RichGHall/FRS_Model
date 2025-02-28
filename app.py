@@ -56,11 +56,15 @@ with tab4:
     run_model = st.button("Run Model")
 
     if run_model:
-        trial = Trial()
-        trial.run_trial()
+        results_df = Trial().run_trial()
+         
+        print_df = results_df.groupby('Run').agg(calls=('Run','size'),total_hang_up=('Hang Up','sum'))
+        print_df['abd_rate']  =   (print_df['total_hang_up'] / print_df['calls']) * 100                                                                  
+                                          
+        print(print_df)     
 
-        agg_results = trial.print_df
-        st.write(agg_results)
+
+
 
 
 
