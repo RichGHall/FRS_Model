@@ -9,7 +9,7 @@ import streamlit as st
 st.title('111 Mental Health (Option 2) Call Centre Discrete Event Simulation Model')
 st.write('This is some blurb describing the model')
 
-tab0, tab1, tab2, tab3, tab4 = st.tabs(["1, Demand", "2, Staffing", "3, Other Variables","4, Run the Model"])
+tab0, tab1, tab2, tab3, tab4 = st.tabs(["About","1, Demand", "2, Staffing", "3, Other Variables","4, Run the Model"])
 
 
 with tab0:
