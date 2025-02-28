@@ -44,7 +44,8 @@ with tab1:
                 public_df.loc[index,"Average Calls"] = edited_public_df.loc[index,"Average Calls"]
 
             public_IAT.to_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv",index=False)
-            public_df.to_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv",index=False)
+            edited_public_df.to_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv",index=False)
+            
             st.write("Public Calls Updated")
 
 
