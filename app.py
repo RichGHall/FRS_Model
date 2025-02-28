@@ -1,12 +1,7 @@
 import streamlit as st 
 import pandas as pd
-
+a
 st.set_page_config(layout="wide")
-
-# Streamlit app code 
-
-
-
 
 st.title('111 Mental Health (Option 2) Call Centre Discrete Event Simulation Model')
 st.write('This is some blurb describing the model')
@@ -31,24 +26,21 @@ with tab1:
         st.subheader("Public Callers")
 
         public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv")
-        public_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")
-                
-        
+        public_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")               
+       
         edited_public_df = st.data_editor(public_df)
         public_updated = st.button("Update Public Calls")
+
         if public_updated:
-            #update to a new dataframe 
-            #run process for updating the main dataframe
+            # update to a new dataframe 
+            # run process for updating the main dataframe
+           
             for index, row in edited_public_df.iterrows():
                 public_IAT.loc[index,"mean_iat"] = 60 / edited_public_df.loc[index,"Average Calls"]
                 public_df.loc[index,"Average Calls"] = edited_public_df.loc[index,"Average Calls"]
                 st.write (public_IAT.loc[index,"mean_iat"]) 
-
-
-            public_IAT.to_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv",index=False)
-            edited_public_df.to_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv",index=False)
-            
-            st.write("Public Calls Updated")
+                
+                st.write("Public Calls Updated")
 
 
 
