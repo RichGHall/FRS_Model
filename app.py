@@ -41,7 +41,7 @@ with tab1:
             #run process for updating the main dataframe
             for index, row in edited_public_df.iterrows():
                 public_IAT.loc[index,"mean_iat"] = 60 / edited_public_df.loc[index,"Average Calls"]
-                public_df.loc[index,"Av Calls"] = edited_public_df.loc[index,"Average Calls"]    
+                public_df.loc[index,"Average Calls"] = edited_public_df.loc[index,"Average Calls"]    
 
         
 
