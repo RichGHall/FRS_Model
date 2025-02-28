@@ -124,7 +124,7 @@ with tab4:
 
             # Adding labels and title
                 plt.xlabel('Hour')
-                plt.ylabel('Y Axis')
+                plt.ylabel('No. Calls')
                 plt.title('Public Call Volumes')
                 plt.legend()
                 plt.ylim(0)
@@ -146,29 +146,29 @@ with tab4:
                 
             with col2:
                 df_prof = results_tot[results_tot['Call Type']=='Prof']
-                plt.plot(df_prof['Call Hour'].values,df_prof['Calls_Av'].values)       
-                x = df_prof['Call Hour'].values
-                y1 = df_prof['Calls_min'].values
-                y2 = df_prof['Calls_max'].values
-                y3 = df_prof['Calls_Av'].values
+                fig = plt.plot(df_prof['Call Hour'].values,df_prof['Calls_Av'].values)       
+                xp = df_prof['Call Hour'].values
+                yp1 = df_prof['Calls_min'].values
+                yp2 = df_prof['Calls_max'].values
+                yp3 = df_prof['Calls_Av'].values
 
             # Plot the two lines
-                plt.plot(x, y1, label='min', color='blue')
-                plt.plot(x, y2, label='max', color='blue')
-                plt.plot(x, y3, label='Average')
+                plt.plot(xp, yp1, label='min', color='blue')
+                plt.plot(xp, yp2, label='max', color='blue')
+                plt.plot(xp, yp3, label='Average')
                 plt.xlim(0, 23) 
 
             # Fill the area between the two lines
-                plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
+                plt.fill_between(x, yp1, yp2, color='blue', alpha=0.2)
 
             # Adding labels and title
                 plt.xlabel('Hour')
-                plt.ylabel('Y Axis')
-                plt.title('Public Call Volumes')
+                plt.ylabel('No. Calls')
+                plt.title('Professional Call Volumes')
                 plt.legend()
                 plt.ylim(0)
             # Display the plot
-                st.pyplot(plt)
+                st.pyplot(fig)
 
 
             #    plt.figure(figsize=(8, 5))  # Set the figure size
