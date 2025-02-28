@@ -56,12 +56,14 @@ with tab4:
     run_model = st.button("Run Model")
 
     if run_model:
-        results_df = Trial().run_trial()
-         
-        print_df = results_df.groupby('Run').agg(calls=('Run','size'),total_hang_up=('Hang Up','sum'))
-        print_df['abd_rate']  =   (print_df['total_hang_up'] / print_df['calls']) * 100                                                                  
-                                          
-        print(print_df)     
+        with st.spinner('Simulating the call centre...'):
+        
+            results_df = Trial().run_trial()
+            
+            print_df = results_df.groupby('Run').agg(calls=('Run','size'),total_hang_up=('Hang Up','sum'))
+            print_df['abd_rate']  =   (print_df['total_hang_up'] / print_df['calls']) * 100                                                                  
+                                            
+            st.dataframe(print_df)    
 
 
 
