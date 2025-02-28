@@ -1,4 +1,5 @@
 import streamlit as st 
+import pandas as pd
 
 
 # Streamlit app code 
@@ -21,11 +22,63 @@ with tab0:
 with tab1: 
     st.header("Demand Details")
     st.write("Use the grid below to update the expected number of calls per hour")
+        #setup columns
+    col1, col2, col3 = st.columns(3)
+
+    #column related to public caller variables
+    with col1:
+        st.subheader("Public Callers")
+
+        public_df = pd.read_csv("https://github.com/RichGHall/FRS_Model/tree/main/files/Public_Av_Calls.csv")
+        public_IAT = pd.read_csv("https://github.com/RichGHall/FRS_Model/tree/main/files/Public_Av_Calls.csv")
+                
+        public_updated = st.button("Update Public Calls")
+        
+        if public_updated:
+            #update to a new dataframe
+            edited_public_df = st.dataeditor(public_df)
+
+            #run process for updating the main dataframe
+            for index, row in edited_public_df.iterrows():
+                public_IAT.loc[index,"mean_iat"] = 60 / edited_public_df.loc[index,"Av Calls"]
+                public_df.loc[index,"Av Calls"] = edited_public_df.loc[index,"Av Calls"]    
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 with tab2:  
     st.header("Staffing Details")
     st.write("Use the grid below to update the expected staffing levels for each hour")
+
+
+
+
 
 
 with tab3:
