@@ -1,18 +1,26 @@
 import streamlit as st 
 
 
+# Streamlit app code 
+
+
+
 
 st.title('111 Mental Health (Option 2) Call Centre Discrete Event Simulation Model')
 st.write('This is some blurb describing the model')
 
-tab1, tab2, tab3, tab4 = st.tabs(["1, Demand", "2, Staffing", "3, Other Variables","4, Run the Model"])
+tab0, tab1, tab2, tab3, tab4 = st.tabs(["1, Demand", "2, Staffing", "3, Other Variables","4, Run the Model"])
 
+
+with tab0:
+    st.header("Introduction")
+    st.write("This model is designed to simulate the operation of a mental health call centre. The model is based on the 111 service, but has been adapted to focus on mental health calls. The model is a discrete event simulation model, which means that it simulates the operation of the call centre in minute-by-minute detail. The model is designed to help you understand how the call centre operates, and to help you identify ways to improve the service. The model is based on a number of assumptions, which are described below. The model is designed to be easy to use, and you can change the assumptions to see how they affect the operation of the call centre. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it. The model is designed to be used by people who are not experts in simulation modelling, so you do not need to have any special skills to use it.")
+    st.write("The model is based on the following assumptions:")
+      
 
 with tab1: 
     st.header("Demand Details")
     st.write("Use the grid below to update the expected number of calls per hour")
-
-
 
 
 with tab2:  
