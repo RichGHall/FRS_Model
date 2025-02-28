@@ -1,5 +1,6 @@
 import streamlit as st 
 import pandas as pd
+
 from FRSModel import Trial
 
 
@@ -58,7 +59,7 @@ with tab4:
         trial = Trial()
         trial.run_trial()
 
-        agg_results = trial.agg_results    
+        agg_results = trial.print_df
         st.write(agg_results)
 
 
