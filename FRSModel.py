@@ -554,8 +554,8 @@ class Trial:
     
 
 # Run the trial
-Trial().run_trial()
-print('model run complete')
-df = Trial().results_tot 
+#Trial().run_trial()
+#print('model run complete')
+#df = Trial().results_tot 
 
 

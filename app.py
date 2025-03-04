@@ -37,10 +37,7 @@ with tab1:
        
         edited_public_df = st.data_editor(public_df)
         public_updated = st.button("Update Public Calls")
-
-
-
-        
+       
 
 with tab4:
     st.header("Run")
@@ -52,14 +49,7 @@ with tab4:
         
         #Collect data from each of the dataframes
 
-            #Demand data, adding the edited data to a list and then converting to a final dataframe
-
-                        
-            
-            
-            #df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['t', 'IAT'])
-                                                                     
-                        
+                                                                                           
             results_df = Trial().run_trial()
            
            
