@@ -1,7 +1,7 @@
 import streamlit as st 
 import pandas as pd
 import matplotlib.pyplot as plt
-from FRSModel import Model,Trial
+from FRSModel import Trial
 
 
 
