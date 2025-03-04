@@ -316,8 +316,8 @@ class Model:
             self.seniors = simpy.Resource(self.env, capacity=current_seniors)
 
             
-            #self.public_arr_log = g.arrivals_public_df.loc[g.arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
-            self.public_arr_log = self.df_public_demand.loc[self.df_public_demand['t']==curr_hour, 'mean_iat'].iloc[0]
+            self.public_arr_log = g.arrivals_public_df.loc[g.arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
+            #self.public_arr_log = self.df_public_demand.loc[self.df_public_demand['t']==curr_hour, 'mean_iat'].iloc[0]
                        
             self.prof_arr_log = g.arrivals_prof_df.loc[g.arrivals_prof_df['t']==curr_hour, 'mean_iat'].iloc[0]
 
