@@ -214,6 +214,25 @@ class Model:
         self.seniors = simpy.Resource(self.env, capacity=g.number_of_senior)
         self.public_demand = df_public_demand
 
+            
+
+
+
+    #    self.arrivals_public_time_dep_df = arrivals_public_time_dep_df
+        
+ #       self.arrivals_public_dist = NSPPThinning(       ##NEW
+ #           data= g.arrivals_public_time_dep_df,
+ #           random_seed1= run_number * 42,
+ #           random_seed2= run_number * 88
+ #       )
+
+ #       self.arrivals_prof_dist = NSPPThinning(       ##NEW
+ #           data= g.arrivals_prof_time_dep_df,
+ #           random_seed1= run_number * 42,
+ #           random_seed2= run_number * 88
+ #       )
+
+
         self.run_number = run_number
 
         # DataFrame to store call details
@@ -331,8 +350,18 @@ class Model:
             call = Public_Caller(self.public_counter, 1, 'Public')
             call.queue_entry_time = self.env.now  # Track when the call enters the queue
 
+
+
+#            if self.env.now > 1440: 
+#                #sampled_inter = self.arrivals_public_dist.sample(simulation_time=self.env.now-1440)
+ #               sampled_inter = Lognormal(self.public_arr_log,1).sample()   
+ #           else:
+ #               #sampled_inter = self.arrivals_public_dist.sample(simulation_time=self.env.now)
+ #               sampled_inter = Lognormal(self.public_arr_log,1).sample()
+
             sampled_inter = Lognormal(self.public_arr_log,1).sample()
-                       
+            
+            
             call.patience = Lognormal(g.public_patience,g.public_pat_sd).sample()
             
             yield self.call_queue.put(call)
@@ -531,20 +560,20 @@ class Trial:
 
 
     #Method to calculate and store the means accross the runs
+   # def calculate_means_hour(self):
  
-    def run_trial(self):       
+    def run_trial(self,df_public_demand):
+        self.df_public_demand = df_public_demand
+        
         
         for run in range(1, g.number_of_runs + 1):
             model = Model(run)
-
             # for _ in range(g.number_of_junior):
             #    model.env.process(model.handle_calls_junior())
-            
             for _ in range(g.number_of_senior):
                 model.env.process(model.handle_calls_senior())
 
-            model.env.process(model.adjust_senior_resources())
-            
+            model.env.process(model.adjust_senior_resources(self.df_public_demand))
             model.env.process(model.generator_public_calls())
             model.env.process(model.generator_prof_calls())
             model.env.run(until=g.sim_duration)
@@ -553,11 +582,150 @@ class Trial:
 
 
         return self.results_df
-    
+
+
+
+
+
+        
+
+    #    self.results_df.to_csv('run_results.csv', index=False, mode='w')
+        
+        print_df = self.results_df.groupby('Run').agg(calls=('Run','size'),
+                                                      total_hang_up=('Hang Up','sum'))
+
+        print_df['abd_rate'] =   (print_df['total_hang_up'] / print_df['calls']) * 100                         
+                                          
+                                          
+        print(print_df)                                  
+                                          
+                                          
+                                          
+                                          
+
+
+
+
+
+ 
+        self.results_agg = self.results_df.groupby(['Run', 'Call Type', 'Call Hour']).agg(
+                                Count=('Run', 'size'),
+                                Avg_Queue_Time=('Queue Time', 'mean'),
+                                Avg_Talk_Time=('Talk Time', 'mean'),
+                                Avg_Work_Time=('Work Time', 'mean'),
+                                Tot_Esc = ('Escalated', 'sum'),
+                                Tot_Abd = ('Hang Up', 'sum')                               
+                                ).reset_index()
+        self.results_agg['Abd Rate'] = self.results_agg['Tot_Abd'] / self.results_agg['Count'] 
+
+
+    #    self.results_agg.to_csv('agg_results.csv', index=False, mode='w')
+        
+        self.results_tot = self.results_agg.groupby(['Call Type','Call Hour']).agg(
+                                Calls_min = ('Count','min'),
+                                Calls_max = ('Count','max'),
+                                Calls_Av = ('Count','mean'),       
+                                AvQ_min = ('Avg_Queue_Time','min'),
+                                AvQ_max = ('Avg_Queue_Time','max'),
+                                AvQ_Av = ('Avg_Queue_Time','mean'),       
+                                Talk_min = ('Avg_Talk_Time','min'),
+                                Talk_max = ('Avg_Talk_Time','max'),
+                                Talk_Av = ('Avg_Talk_Time','mean'),       
+                                Abd_min = ('Abd Rate','min'),
+                                Abd_max = ('Abd Rate','max'),
+                                Abd_Av = ('Abd Rate','mean'),                                
+                                Work_min = ('Avg_Work_Time','min'),
+                                Work_max = ('Avg_Work_Time','max'),
+                                Work_Av = ('Avg_Work_Time','mean'),                                
+                                Esc_min = ('Tot_Esc','min'),
+                                Esc_max = ('Tot_Esc','max'),
+                                Esc_Av = ('Tot_Esc','mean')                                
+                                ).reset_index()
+        
+    #    self.results_tot.to_csv('tot_results.csv', index=False, mode='w')
+
+        
+
+        # Adding labels and title
+
+      #  df = self.results_tot
+        
+      #  df = df[df['Call Type']=='Public']
+
+     #   plt.plot(df['Call Hour'].values,df['Calls_Av'].values)
+        
+     #   x = df['Call Hour'].values
+     #   y1 = df['Calls_min'].values
+     #   y2 = df['Calls_max'].values
+     #   y3 = df['Calls_Av'].values
+
+        # Plot the two lines
+     #   plt.plot(x, y1, label='min', color='blue')
+     #   plt.plot(x, y2, label='max', color='blue')
+     #   plt.plot(x, y3, label='Average')
+     #   plt.xlim(0, 23) 
+
+        # Fill the area between the two lines
+     #   plt.fill_between(x, y1, y2, color='blue', alpha=0.2)
+
+        # Adding labels and title
+      #  plt.xlabel('Hour')
+      #  plt.ylabel('Y Axis')
+      #  plt.title('Public Call Volumes')
+     #   plt.legend()
+     #   plt.ylim(0)
+        # Display the plot
+    #    plt.show()
+
+
+      #  plt.figure(figsize=(8, 5))  # Set the figure size
+      #  plt.hist(print_df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
+
+        # Add labels and title
+     #   plt.xlabel('Percentage Calls Abandoned')
+     #   plt.ylabel('Frequency')
+     #   plt.title('Histogram of Abandonment Rate')
+
+        # Display the histogram
+     #   plt.show()
+
+
+
+
+
+
+
+
+
+
+
+        
+        # plt.plot(df['Call Hour'].values,df['Calls_max'])
+        # plt.plot(df['Call Hour'].values,df['Calls_min'])
+        # plt.fill_between(df['Call Hour'].values,df['Calls_min'].va,df['Calls_max'],color='gray', alpha=0.5)
+
+
+        # plt.xlabel('X Axis')
+        # plt.ylabel('Y Axis')
+        # plt.ylim(1,23)
+        
+        # plt.title('Line Chart from DataFrame Fields')
+
+
+        # plt.show()
+
+       
+
+
+
+
+
+
+
 
 # Run the trial
-#Trial().run_trial()
-#print('model run complete')
-#df = Trial().results_tot 
+Trial().run_trial()
+print('model run complete')
+df = Trial().results_tot 
 
 
