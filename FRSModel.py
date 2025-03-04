@@ -198,7 +198,7 @@ class Prof_Caller:
 
 # Class representing the simulation model
 class Model:
-    def __init__(self, run_number):
+    def __init__(self, run_number,df_public_demand):
         self.env = simpy.Environment()
         self.public_counter = 0
         self.prof_counter = 0
@@ -212,7 +212,7 @@ class Model:
         self.call_queue = simpy.PriorityStore(self.env) 
         self.juniors = simpy.Resource(self.env, capacity=g.number_of_junior)
         self.seniors = simpy.Resource(self.env, capacity=g.number_of_senior)
-
+        self.public_demand = df_public_demand
 
             
 
@@ -307,6 +307,13 @@ class Model:
 
 
 
+    def adjust_df(self,df_public_demand):
+        
+        self.df_public_demand = df_public_demand
+
+
+
+
 
 
 
@@ -324,7 +331,10 @@ class Model:
             current_seniors = g.senior_resources_df.loc[g.arrivals_prof_df['t']==curr_hour, 'res'].iloc[0]            
             self.seniors = simpy.Resource(self.env, capacity=current_seniors)
 
-            self.public_arr_log = g.arrivals_public_df.loc[g.arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
+            
+            #self.public_arr_log = g.arrivals_public_df.loc[g.arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
+            self.public_arr_log = self.public_demand.loc[self.public_demand['t']==curr_hour, 'mean_iat'].iloc[0]
+                       
             self.prof_arr_log = g.arrivals_prof_df.loc[g.arrivals_prof_df['t']==curr_hour, 'mean_iat'].iloc[0]
 
             
@@ -338,19 +348,15 @@ class Model:
             call.queue_entry_time = self.env.now  # Track when the call enters the queue
 
 
-            
 
+#            if self.env.now > 1440: 
+#                #sampled_inter = self.arrivals_public_dist.sample(simulation_time=self.env.now-1440)
+ #               sampled_inter = Lognormal(self.public_arr_log,1).sample()   
+ #           else:
+ #               #sampled_inter = self.arrivals_public_dist.sample(simulation_time=self.env.now)
+ #               sampled_inter = Lognormal(self.public_arr_log,1).sample()
 
-
-
-
-            if self.env.now > 1440: 
-                #sampled_inter = self.arrivals_public_dist.sample(simulation_time=self.env.now-1440)
-                sampled_inter = Lognormal(self.public_arr_log,1).sample()   
-            else:
-                #sampled_inter = self.arrivals_public_dist.sample(simulation_time=self.env.now)
-                sampled_inter = Lognormal(self.public_arr_log,1).sample()
-            
+            sampled_inter = Lognormal(self.public_arr_log,1).sample()
             
             
             call.patience = Lognormal(g.public_patience,g.public_pat_sd).sample()
