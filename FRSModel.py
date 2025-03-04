@@ -532,9 +532,7 @@ class Trial:
 
     #Method to calculate and store the means accross the runs
  
-    def run_trial(self,df_public_demand):
-        self.df_public_demand = df_public_demand
-        
+    def run_trial(self):       
         
         for run in range(1, g.number_of_runs + 1):
             model = Model(run)
@@ -543,7 +541,8 @@ class Trial:
             for _ in range(g.number_of_senior):
                 model.env.process(model.handle_calls_senior())
 
-            model.env.process(model.adjust_senior_resources(self.df_public_demand))
+            model.env.process(model.adjust_senior_resources())
+            
             model.env.process(model.generator_public_calls())
             model.env.process(model.generator_prof_calls())
             model.env.run(until=g.sim_duration)

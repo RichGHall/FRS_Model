@@ -60,7 +60,7 @@ with tab4:
             #df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['t', 'IAT'])
                                                                      
                         
-            results_df = Trial().run_trial(public_IAT)
+            results_df = Trial().run_trial()
            
            
             results_agg = results_df.groupby(['Run', 'Call Type', 'Call Hour']).agg(
@@ -132,82 +132,6 @@ with tab4:
                 plt.ylim(0)
             # Display the plot
                 st.pyplot(plt)
-
-
-            #    plt.figure(figsize=(8, 5))  # Set the figure size
-            #    plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
-
-            # Add labels and title
-            #    plt.xlabel('Percentage Calls Abandoned')
-            #    plt.ylabel('Frequency')
-            #    plt.title('Histogram of Abandonment Rate')
-
-            # Display the histogram
-            #    st.pyplot(plt)           
-          
-                
-            with col2:
-                df_prof = results_tot[results_tot['Call Type']=='Prof']
-                fig = plt.plot(df_prof['Call Hour'].values,df_prof['Calls_Av'].values)       
-                xp = df_prof['Call Hour'].values
-                yp1 = df_prof['Calls_min'].values
-                yp2 = df_prof['Calls_max'].values
-                yp3 = df_prof['Calls_Av'].values
-
-            # Plot the two lines
-                plt.plot(xp, yp1, label='min', color='blue')
-                plt.plot(xp, yp2, label='max', color='blue')
-                plt.plot(xp, yp3, label='Average')
-                plt.xlim(0, 23) 
-
-            # Fill the area between the two lines
-                plt.fill_between(x, yp1, yp2, color='blue', alpha=0.2)
-
-            # Adding labels and title
-                plt.xlabel('Hour')
-                plt.ylabel('No. Calls')
-                plt.title('Professional Call Volumes')
-                plt.legend()
-                plt.ylim(0)
-            # Display the plot
-                st.pyplot(fig)
-
-
-            #    plt.figure(figsize=(8, 5))  # Set the figure size
-             #   plt.hist(df['abd_rate'], bins=10, color='skyblue', edgecolor='black')
-
-            # Add labels and title
-            #    plt.xlabel('Percentage Calls Abandoned')
-            #    plt.ylabel('Frequency')
-             #   plt.title('Histogram of Abandonment Rate')
-
-            # Display the histogram
-            #    st.pyplot(plt)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             st.dataframe(print_df)    
