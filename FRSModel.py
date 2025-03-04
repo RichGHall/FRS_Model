@@ -93,10 +93,7 @@ class g:
     ## load csv files required for the model
 
     arrivals_public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")   
- #   arrivals_public_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
-
     arrivals_prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_IAT.csv")  
- #   arrivals_prof_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
 
     senior_resources_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Senior_Resources.csv")
 
@@ -222,11 +219,12 @@ class Model:
 
 
         self.arrivals_public_time_dep_df = arrivals_public_time_dep_df
-        self.arrivals_public_dist = NSPPThinning(       ##NEW
-            data= self.arrivals_public_time_dep_df,
-            random_seed1= run_number * 42,
-            random_seed2= run_number * 88
-        )
+        
+    #    self.arrivals_public_dist = NSPPThinning(       ##NEW
+    #        data= self.arrivals_public_time_dep_df,
+    #        random_seed1= run_number * 42,
+    #        random_seed2= run_number * 88
+    #    )
 
         self.arrivals_prof_dist = NSPPThinning(       ##NEW
             data= g.arrivals_prof_time_dep_df,
