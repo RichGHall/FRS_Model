@@ -532,10 +532,11 @@ class Trial:
 
     #Method to calculate and store the means accross the runs
  
-    def run_trial(self):       
-        
+    def run_trial(self,df):       
+        self.df = df
         for run in range(1, g.number_of_runs + 1):
-            model = Model(run)
+            model = Model(run,self.df)
+            
             # for _ in range(g.number_of_junior):
             #    model.env.process(model.handle_calls_junior())
             for _ in range(g.number_of_senior):
