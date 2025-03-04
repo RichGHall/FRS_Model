@@ -321,6 +321,9 @@ class Model:
     ## This function runs every hour and adjusts the level of resourcing and arrivals rates.
     ## It calculates the current hour by rounding down self.env.now, calculates the rates for that hour and then waits for another 60 minutes
     def adjust_senior_resources(self,df_public_demand):
+        
+        self.df_public_demand = df_public_demand 
+        
         while True:
             
             if self.env.now > 1439:
