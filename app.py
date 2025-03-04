@@ -1,7 +1,7 @@
 import streamlit as st 
 import pandas as pd
 import matplotlib.pyplot as plt
-from FRSModel import g, Model, Trial
+from FRSModel import g, Trial
 
 
 
@@ -62,16 +62,10 @@ with tab4:
             
             
             
-            df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['t', 'IAT'])
-                     
-            
-            
-            
-            
-            
-            
-            
-            
+            #df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['t', 'IAT'])
+                   
+                                                                      
+                        
             results_df = Trial().run_trial()
            
            
