@@ -1,7 +1,7 @@
 import streamlit as st 
 import pandas as pd
 import matplotlib.pyplot as plt
-from FRSModel import Trial
+from FRSModel import g, Model, Trial
 
 
 
@@ -38,17 +38,9 @@ with tab1:
         edited_public_df = st.data_editor(public_df)
         public_updated = st.button("Update Public Calls")
 
-        if public_updated:
-            # update to a new dataframe 
-            # run process for updating the main dataframe
-           
-            for index, row in edited_public_df.iterrows():
-                public_IAT.loc[index,"mean_iat"] = 60 / edited_public_df.loc[index,"Average Calls"]
-                public_df.loc[index,"Average Calls"] = edited_public_df.loc[index,"Average Calls"]
-                st.write (public_IAT.loc[index,"mean_iat"]) 
-                
-                st.write("Public Calls Updated")
 
+
+        
 
 with tab4:
     st.header("Run")
@@ -58,7 +50,29 @@ with tab4:
     if run_model:
         with st.spinner('Simulating the call centre...'):
         
-            results_df = Trial().run_trial()
+        #Collect data from each of the dataframes
+
+            #Demand data, adding the edited data to a list and then converting to a final dataframe
+
+            ls_demand_public = []
+            for index, row in edited_public_df.iterrows():    
+                iat = row['Average Calls'] / 60 
+                min = row['Hour'] * 60 
+                ls_demand_public.append([min, iat])
+            
+            
+            
+            df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['Minute', 'IAT'])
+                     
+            
+            
+            
+            
+            
+            
+            
+            
+            results_df = Trial().run_trial(df_public_arrivals)
            
            
             results_agg = results_df.groupby(['Run', 'Call Type', 'Call Hour']).agg(

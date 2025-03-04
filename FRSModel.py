@@ -93,10 +93,10 @@ class g:
     ## load csv files required for the model
 
     arrivals_public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")   
-    arrivals_public_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
+ #   arrivals_public_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
 
     arrivals_prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_IAT.csv")  
-    arrivals_prof_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
+ #   arrivals_prof_df["arrival_rate"] = arrivals_public_df['mean_iat'].apply(lambda x: 1/x)
 
     senior_resources_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Senior_Resources.csv")
 
@@ -201,7 +201,7 @@ class Prof_Caller:
 
 # Class representing the simulation model
 class Model:
-    def __init__(self, run_number):
+    def __init__(self, run_number,arrivals_public_time_dep_df):
         self.env = simpy.Environment()
         self.public_counter = 0
         self.prof_counter = 0
@@ -216,8 +216,14 @@ class Model:
         self.juniors = simpy.Resource(self.env, capacity=g.number_of_junior)
         self.seniors = simpy.Resource(self.env, capacity=g.number_of_senior)
 
+
+            
+
+
+
+        self.arrivals_public_time_dep_df = arrivals_public_time_dep_df
         self.arrivals_public_dist = NSPPThinning(       ##NEW
-            data= g.arrivals_public_time_dep_df,
+            data= self.arrivals_public_time_dep_df,
             random_seed1= run_number * 42,
             random_seed2= run_number * 88
         )
@@ -303,16 +309,9 @@ class Model:
 
 
 
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     
     ## This function runs every hour and adjusts the level of resourcing and arrivals rates.
     ## It calculates the current hour by rounding down self.env.now, calculates the rates for that hour and then waits for another 60 minutes
