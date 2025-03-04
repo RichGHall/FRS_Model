@@ -54,12 +54,7 @@ with tab4:
 
             #Demand data, adding the edited data to a list and then converting to a final dataframe
 
-            ls_demand_public = []
-            for index, row in edited_public_df.iterrows():    
-                iat = row['Average Calls'] / 60 
-                min = row['Hour'] * 60 
-                ls_demand_public.append([min, iat])
-            
+                        
             
             
             #df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['t', 'IAT'])
