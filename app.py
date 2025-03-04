@@ -62,7 +62,7 @@ with tab4:
             
             
             
-            df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['Minute', 'IAT'])
+            df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['t', 'IAT'])
                      
             
             
@@ -72,7 +72,7 @@ with tab4:
             
             
             
-            results_df = Trial().run_trial(df_public_arrivals)
+            results_df = Trial().run_trial()
            
            
             results_agg = results_df.groupby(['Run', 'Call Type', 'Call Hour']).agg(
