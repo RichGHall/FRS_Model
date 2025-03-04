@@ -220,11 +220,11 @@ class Model:
 
         self.arrivals_public_time_dep_df = arrivals_public_time_dep_df
         
-    #    self.arrivals_public_dist = NSPPThinning(       ##NEW
-    #        data= self.arrivals_public_time_dep_df,
-    #        random_seed1= run_number * 42,
-    #        random_seed2= run_number * 88
-    #    )
+        self.arrivals_public_dist = NSPPThinning(       ##NEW
+            data= self.arrivals_public_time_dep_df,
+            random_seed1= run_number * 42,
+            random_seed2= run_number * 88
+        )
 
         self.arrivals_prof_dist = NSPPThinning(       ##NEW
             data= g.arrivals_prof_time_dep_df,
