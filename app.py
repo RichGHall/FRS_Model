@@ -58,10 +58,9 @@ with tab4:
             
             
             #df_public_arrivals = pd.DataFrame(ls_demand_public, columns=['t', 'IAT'])
-                   
-            Model.adjust_dfs(public_IAT)                                                          
+                                                                     
                         
-            results_df = Trial().run_trial()
+            results_df = Trial().run_trial(public_IAT)
            
            
             results_agg = results_df.groupby(['Run', 'Call Type', 'Call Hour']).agg(

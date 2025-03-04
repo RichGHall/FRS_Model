@@ -320,7 +320,7 @@ class Model:
     
     ## This function runs every hour and adjusts the level of resourcing and arrivals rates.
     ## It calculates the current hour by rounding down self.env.now, calculates the rates for that hour and then waits for another 60 minutes
-    def adjust_senior_resources(self):
+    def adjust_senior_resources(self,df_public_demand):
         while True:
             
             if self.env.now > 1439:
@@ -333,7 +333,7 @@ class Model:
 
             
             #self.public_arr_log = g.arrivals_public_df.loc[g.arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
-            self.public_arr_log = self.public_demand.loc[self.public_demand['t']==curr_hour, 'mean_iat'].iloc[0]
+            self.public_arr_log = self.df_public_demand.loc[self.df_public_demand['t']==curr_hour, 'mean_iat'].iloc[0]
                        
             self.prof_arr_log = g.arrivals_prof_df.loc[g.arrivals_prof_df['t']==curr_hour, 'mean_iat'].iloc[0]
 
@@ -559,7 +559,7 @@ class Trial:
     #Method to calculate and store the means accross the runs
    # def calculate_means_hour(self):
  
-    def run_trial(self):
+    def run_trial(self,df_public_demand):
         for run in range(1, g.number_of_runs + 1):
             model = Model(run)
             # for _ in range(g.number_of_junior):
@@ -567,7 +567,7 @@ class Trial:
             for _ in range(g.number_of_senior):
                 model.env.process(model.handle_calls_senior())
 
-            model.env.process(model.adjust_senior_resources())
+            model.env.process(model.adjust_senior_resources(df_public_demand))
             model.env.process(model.generator_public_calls())
             model.env.process(model.generator_prof_calls())
             model.env.run(until=g.sim_duration)
