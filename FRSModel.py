@@ -198,7 +198,7 @@ class Prof_Caller:
 
 # Class representing the simulation model
 class Model:
-    def __init__(self, run_number,arrivals_public_time_dep_df):
+    def __init__(self, run_number):
         self.env = simpy.Environment()
         self.public_counter = 0
         self.prof_counter = 0
