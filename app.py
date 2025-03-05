@@ -34,8 +34,6 @@ with tab1:
         st.subheader("Public Callers")
 
         public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv")
-        public_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")               
-       
         edited_public_df = st.data_editor(public_df)
         
        
@@ -43,20 +41,7 @@ with tab1:
     with col2:
         st.subheader("Professional Callers")
 
-        prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")
-        prof_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_IAT.csv")
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")  
         edited_prof_df = st.data_editor(prof_df)
 
 
