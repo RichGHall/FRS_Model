@@ -34,52 +34,24 @@ with tab1:
         st.subheader("Public Callers")
 
         public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv")
-        edited_public_df = st.data_editor(public_df)
-        
-       
-
+        edited_public_df = st.data_editor(public_df, num_rows=24)
+              
     with col2:
         st.subheader("Professional Callers")
 
         prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")  
-        edited_prof_df = st.data_editor(prof_df)
-
-
-
-
-
-
-
-
-
-    with col3:
- 
-        #Public Call Demand Data
-        transformed_data = [
-        {"t": row["Hour"] * 60, "mean_iat": 60/row["Average Calls"]}
-        for _, row in edited_public_df.iterrows() ]
-        public_demand_df = pd.DataFrame(transformed_data)
-
-    #Professuional Call Demand Data   
-        transformed_prof = [
-        {"t": row["Hour"] * 60, "mean_iat": 60/row["Average Calls"]}
-        for _, row in edited_prof_df.iterrows() ]
-        prof_demand_df = pd.DataFrame(transformed_prof)
-
-        st.table(public_demand_df)
-        st.table(prof_demand_df)
-
-
-
+        edited_prof_df = st.data_editor(prof_df, num_rows=24)
 
 with tab2:  
     st.header("Staffing Details")
     st.write("Use the grid below to update the expected staffing levels for each hour")
 
-
-
-
-
+    staffinf_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Senior_Resources.csv")  
+    df_staff_renamed  = staffinf_df.rename(columns={"t": "Hour", "res": "Staff"})
+    df_staff_renamed["Hour"] =  df_staff_renamed["Hour"] / 60
+    
+    df_staff_edited = st.data_editor(df_staff_renamed, num_rows=24) 
+    
 
 with tab3:
     ## description of the tab and how to use it
