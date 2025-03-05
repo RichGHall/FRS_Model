@@ -514,7 +514,7 @@ class Model:
 
 # Class representing a trial for our simulation
 class Trial:
-    def __init__(self,df):
+    def __init__(self):
         self.results_df = pd.DataFrame()
         self.results_agg = pd.DataFrame()
         self.results_agg["Run"] = [1]
@@ -549,7 +549,7 @@ class Trial:
         self.results_tot["Esc_min"] = [0]
         self.results_tot["Esc_max"] = [0]
         self.results_tot["Esc_Av"] = [0]  
-        self.df = df
+        
 
 
 
