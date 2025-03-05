@@ -124,7 +124,7 @@ class g:
     prob_escalation = 0.40      #probability of a call requiring escalation/call back
 
     sim_duration = 2880         #duration of simulation in mins (2 x 24hrs)
-    number_of_runs = 40         #number of runs of each simulation 
+    number_of_runs = 1         #number of runs of each simulation 
 
     public_patience = 5         #level of patience (ie how long before they hang up) for public calls
     public_pat_sd = 2           #SD of public patience 
@@ -314,7 +314,7 @@ class Model:
     
     ## This function runs every hour and adjusts the level of resourcing and arrivals rates.
     ## It calculates the current hour by rounding down self.env.now, calculates the rates for that hour and then waits for another 60 minutes
-    def adjust_senior_resources(self,df):
+    def adjust_senior_resources(self,df_public_demand,df_prof_demand):
         
     
         
@@ -330,9 +330,8 @@ class Model:
 
             
             #self.public_arr_log = g.arrivals_public_df.loc[g.arrivals_public_df['t']==curr_hour, 'mean_iat'].iloc[0]
-            self.public_arr_log = df.loc[df['t']==curr_hour, 'mean_iat'].iloc[0]
-                       
-            self.prof_arr_log = g.arrivals_prof_df.loc[g.arrivals_prof_df['t']==curr_hour, 'mean_iat'].iloc[0]
+            self.public_arr_log = df_public_demand.loc[df_public_demand['t']==curr_hour, 'mean_iat'].iloc[0]
+            self.prof_arr_log = df_prof_demand.loc[df_prof_demand['t']==curr_hour, 'mean_iat'].iloc[0]
 
             
             yield self.env.timeout(60)  # Wait until the next hour
@@ -514,7 +513,7 @@ class Model:
 
 # Class representing a trial for our simulation
 class Trial:
-    def __init__(self, df):
+    def __init__(self, df_public_demand,df_prof_demand):
         self.results_df = pd.DataFrame()
         self.results_agg = pd.DataFrame()
         self.results_agg["Run"] = [1]
@@ -549,9 +548,9 @@ class Trial:
         self.results_tot["Esc_min"] = [0]
         self.results_tot["Esc_max"] = [0]
         self.results_tot["Esc_Av"] = [0]  
-        self.df = df
-
-
+        
+        self.df_public_demand = df_public_demand
+        self.df_prof_demand = df_prof_demand
 
 
     #Method to calculate and store the means accross the runs
@@ -567,7 +566,7 @@ class Trial:
             for _ in range(g.number_of_senior):
                 model.env.process(model.handle_calls_senior())
 
-            model.env.process(model.adjust_senior_resources(self.df))
+            model.env.process(model.adjust_senior_resources(self.df_public_demand,df_prof_demand))
             model.env.process(model.generator_public_calls())
             model.env.process(model.generator_prof_calls())
             model.env.run(until=g.sim_duration)
