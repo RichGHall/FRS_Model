@@ -51,7 +51,7 @@ with tab4:
 
         #Public Call Demand
             transformed_data = [
-            {"t": row["Hour"] * 60, "Mean_IAT": row["Average Calls"] / 60}
+            {"t": row["Hour"] * 60, "mean_iat": row["Average Calls"] / 60}
             for _, row in edited_public_df.iterrows() ]
             public_demand_df = pd.DataFrame(transformed_data)
 
