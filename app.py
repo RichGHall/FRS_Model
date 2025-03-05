@@ -49,10 +49,53 @@ with tab4:
         
         #Collect data from each of the dataframes
 
-            
+        #Public Call Demand
+            transformed_data = [
+            {"t": row["Hour"] * 60, "Mean_IAT": row["Average Calls"] / 60}
+            for _, row in edited_public_df.iterrows() ]
+            public_demand_df = pd.DataFrame(transformed_data)
+
            
-                                                                                         
-            results_df = Trial(public_IAT).run_trial()          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            results_df = Trial(public_demand_df).run_trial()          
 
 
 
