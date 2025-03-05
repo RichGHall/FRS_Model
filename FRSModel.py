@@ -566,7 +566,7 @@ class Trial:
             for _ in range(g.number_of_senior):
                 model.env.process(model.handle_calls_senior())
 
-            model.env.process(model.adjust_senior_resources(self.df_public_demand,df_prof_demand))
+            model.env.process(model.adjust_senior_resources(self.df_public_demand,self.df_prof_demand))
             model.env.process(model.generator_public_calls())
             model.env.process(model.generator_prof_calls())
             model.env.run(until=g.sim_duration)
