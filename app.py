@@ -49,10 +49,10 @@ with tab4:
         
         #Collect data from each of the dataframes
 
-            
+            trial = Trial()
            
                                                                                          
-            results_df = Trial().run_trial(public_IAT)          
+            results_df = trial.run_trial(public_IAT)          
 
 
 
