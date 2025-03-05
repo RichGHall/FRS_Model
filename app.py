@@ -4,9 +4,25 @@ import matplotlib.pyplot as plt
 from FRSModel import Trial, g 
 
 
+# Inject JavaScript for smooth scrolling
+scroll_script = """
+<script>
+function scrollToSection(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+"""
+st.markdown(scroll_script, unsafe_allow_html=True)
 
+# Button to scroll
+st.markdown('<button onclick="scrollToSection(\'demand-section\')">Go to Demand Section</button>', unsafe_allow_html=True)
 
+# Content to simulate scrolling effect
+st.write("Scroll down to see the Demand section..." * 30)
 
+# Demand Section
+st.markdown('<h2 id="demand-section">Demand</h2>', unsafe_allow_html=True)
+st.write("This is the Demand section.")
 
 
 st.set_page_config(layout="wide")
@@ -19,12 +35,18 @@ tab0, tab1 = st.tabs(["The Model","About"])
 with st.sidebar:
     st.write("This is the sidebar")
     st.markdown("[Update Demand](#1-Demand)")
-    st.markdown("[Update Demand](#2-Staff)")
-    st.markdown("[Update Demand](#3-CallLength)")
-    st.markdown("[Update Demand](#4-Other)")
-    st.markdown("[Update Demand](#5-Run)")
+    st.markdown("[Update Staff](#2-Staff)")
+    st.markdown("[Call Details](#3-CallLength)")
+    st.markdown("[Other Variables](#4-Other)")
+    st.markdown("[Run the Model](#5-Run)")
 
 with tab0:
+    
+    st.markdown(scroll_script, unsafe_allow_html=True)
+    # Button to scroll
+    st.markdown('<button onclick="scrollToSection(\'demand-section\')">Go to Demand Section</button>', unsafe_allow_html=True)
+
+    
     st.header("The Model")
     st.write("Use this section to .")
 
