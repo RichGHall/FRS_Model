@@ -85,9 +85,6 @@ with tab1:
 
 
 
-
-
-
 with tab4:
     st.header("Run")
     st.write("Use the button below to run the model")
