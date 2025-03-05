@@ -36,8 +36,18 @@ with tab1:
         public_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_IAT.csv")               
        
         edited_public_df = st.data_editor(public_df)
-        public_updated = st.button("Update Public Calls")
+        
        
+
+    with col2:
+        st.subheader("Professional Callers")
+
+        prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")
+        prof_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_IAT.csv")
+
+        edited_prof_df = st.data_editor(prof_df)
+
+
 
 with tab4:
     st.header("Run")
@@ -49,13 +59,21 @@ with tab4:
         
         #Collect data from each of the dataframes
 
-        #Public Call Demand
+        #Public Call Demand Data
             transformed_data = [
             {"t": row["Hour"] * 60, "mean_iat": row["Average Calls"] / 60}
             for _, row in edited_public_df.iterrows() ]
             public_demand_df = pd.DataFrame(transformed_data)
 
-           
+        #Professuional Call Demand Data   
+            transformed_prof = [
+            {"t": row["Hour"] * 60, "mean_iat": row["Average Calls"] / 60}
+            for _, row in edited_prof_df.iterrows() ]
+            prof_demand_df = pd.DataFrame(transformed_prof)
+
+
+
+        #Staffing Data    
 
 
 
@@ -90,12 +108,7 @@ with tab4:
 
 
 
-
-
-
-
-
-            results_df = Trial(public_demand_df).run_trial()          
+            results_df = Trial(public_demand_df,prof_demand_df).run_trial()          
 
 
 
