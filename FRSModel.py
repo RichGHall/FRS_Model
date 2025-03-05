@@ -514,7 +514,7 @@ class Model:
 
 # Class representing a trial for our simulation
 class Trial:
-    def __init__(self):
+    def __init__(self, df):
         self.results_df = pd.DataFrame()
         self.results_agg = pd.DataFrame()
         self.results_agg["Run"] = [1]
@@ -549,14 +549,15 @@ class Trial:
         self.results_tot["Esc_min"] = [0]
         self.results_tot["Esc_max"] = [0]
         self.results_tot["Esc_Av"] = [0]  
-        
+        self.df = df
+
 
 
 
     #Method to calculate and store the means accross the runs
    # def calculate_means_hour(self):
  
-    def run_trial(self,df):
+    def run_trial(self):
         
         
         for run in range(1, g.number_of_runs + 1):
@@ -566,7 +567,7 @@ class Trial:
             for _ in range(g.number_of_senior):
                 model.env.process(model.handle_calls_senior())
 
-            model.env.process(model.adjust_senior_resources(df))
+            model.env.process(model.adjust_senior_resources(self.df))
             model.env.process(model.generator_public_calls())
             model.env.process(model.generator_prof_calls())
             model.env.run(until=g.sim_duration)
