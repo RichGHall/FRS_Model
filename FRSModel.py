@@ -103,10 +103,10 @@ class g:
     arrivals_prof_time_dep_df = arrivals_prof_df  
        
     #talk times   
-    public_talk_shape = 0.8562401523401358
+    public_talk_shape = 1  #0.8562401523401358
     public_talk_rate = 0.08372673973690065
 
-    prof_talk_shape  = 1.2808212740988951 
+    prof_talk_shape  = 1  #1.2808212740988951 
     prof_talk_rate = 0.26374347311137214
 
     mean_public_work = 30       #average work time for public calls
