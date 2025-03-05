@@ -198,7 +198,7 @@ class Prof_Caller:
 
 # Class representing the simulation model
 class Model:
-    def __init__(self, run_number,df_public_demand):
+    def __init__(self, run_number,):
         self.env = simpy.Environment()
         self.public_counter = 0
         self.prof_counter = 0
@@ -212,7 +212,7 @@ class Model:
         self.call_queue = simpy.PriorityStore(self.env) 
         self.juniors = simpy.Resource(self.env, capacity=g.number_of_junior)
         self.seniors = simpy.Resource(self.env, capacity=g.number_of_senior)
-        self.public_demand = df_public_demand
+   
 
             
 
@@ -307,22 +307,16 @@ class Model:
 
 
 
-    def adjust_df(self,df_public_demand):
-        
-        self.df_public_demand = df_public_demand
-
-
-
-
+ 
 
 
 
     
     ## This function runs every hour and adjusts the level of resourcing and arrivals rates.
     ## It calculates the current hour by rounding down self.env.now, calculates the rates for that hour and then waits for another 60 minutes
-    def adjust_senior_resources(self,df_public_demand):
+    def adjust_senior_resources(self):
         
-        self.df_public_demand = df_public_demand 
+    
         
         while True:
             
@@ -562,9 +556,8 @@ class Trial:
     #Method to calculate and store the means accross the runs
    # def calculate_means_hour(self):
  
-    def run_trial(self,df_public_demand):
-        self.df_public_demand = df_public_demand
-        
+    def run_trial(self):
+
         
         for run in range(1, g.number_of_runs + 1):
             model = Model(run)
