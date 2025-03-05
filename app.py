@@ -50,11 +50,30 @@ with tab4:
         #Collect data from each of the dataframes
 
             
-
-            
-                                                                                           
-            results_df = Trial().run_trial()          
            
+                                                                                         
+            results_df = Trial().run_trial(public_IAT)          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             results_agg = results_df.groupby(['Run', 'Call Type', 'Call Hour']).agg(
                                 Count=('Run', 'size'),
                                 Avg_Queue_Time=('Queue Time', 'mean'),
