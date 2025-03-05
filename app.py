@@ -91,7 +91,7 @@ with tab0:
                                 max_value=1.0,    # float
                                 value=0.01,       # float
                                 step=0.01         # float
-
+            )
 
     st.subheader("Professional Callers")
         
