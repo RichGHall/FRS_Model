@@ -45,7 +45,46 @@ with tab1:
         prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")
         prof_IAT = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_IAT.csv")
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         edited_prof_df = st.data_editor(prof_df)
+
+
+
+
+
+
+
+
+
+    with col3:
+ 
+        #Public Call Demand Data
+        transformed_data = [
+        {"t": row["Hour"] * 60, "mean_iat": row["Average Calls"] / 60}
+        for _, row in edited_public_df.iterrows() ]
+        public_demand_df = pd.DataFrame(transformed_data)
+
+    #Professuional Call Demand Data   
+        transformed_prof = [
+        {"t": row["Hour"] * 60, "mean_iat": row["Average Calls"] / 60}
+        for _, row in edited_prof_df.iterrows() ]
+        prof_demand_df = pd.DataFrame(transformed_prof)
+
+        st.table(public_demand_df)
+        st.table(prof_demand_df)
+
+
+
 
 
 
@@ -82,8 +121,7 @@ with tab4:
 
 
 
-
-
+        
 
 
 
