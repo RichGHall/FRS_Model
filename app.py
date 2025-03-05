@@ -24,25 +24,25 @@ with tab0:
         st.header("The Model")
         st.write("Use this section to .")
 
-        st.markdown("### Demand {#1-Demand}")
+        st.markdown("### Demand")
 
         st.write("Use the grids below to update the expected number of calls per hour.")
         st.write("This should be new callers only, the model will calcuate whether they will call back or not")
 
             #setup columns
+        with st.expander("Click here to Adjust Demand to the Public Line"):    
+            st.subheader("Public Line - Average Calls per hour")
+            st.write("Use the grid below to update the expected number of calls per hour for the Public Line")
 
-        st.subheader("Public Line - Average Calls per hour")
-        st.write("Use the grid below to update the expected number of calls per hour for the Public Line")
-
-        public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv")
-        edited_public_df = st.data_editor(public_df, num_rows=24)
+            public_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Public_Av_Calls.csv")
+            edited_public_df = st.data_editor(public_df, num_rows=24)
                 
-        
-        st.subheader("Professional Line - Average Calls per hour")
-        st.write("Use the grid below to update the expected number of calls per hour for the Professional Line")
+        with st.expander("Click here to Adjust Demand to the Professional Line"):  
+            st.subheader("Professional Line - Average Calls per hour")
+            st.write("Use the grid below to update the expected number of calls per hour for the Professional Line")
 
-        prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")  
-        edited_prof_df = st.data_editor(prof_df, num_rows=24)
+            prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")  
+            edited_prof_df = st.data_editor(prof_df, num_rows=24)
 
         st.markdown("### Staffing Levels {#2-Staff}")
 
