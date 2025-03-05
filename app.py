@@ -76,7 +76,7 @@ with tab1:
 
     #Professuional Call Demand Data   
         transformed_prof = [
-        {"t": row["Hour"] * 60, "mean_iat": 60 row["Average Calls"]}
+        {"t": row["Hour"] * 60, "mean_iat": 60/row["Average Calls"]}
         for _, row in edited_prof_df.iterrows() ]
         prof_demand_df = pd.DataFrame(transformed_prof)
 
