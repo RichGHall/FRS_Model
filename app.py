@@ -100,13 +100,13 @@ with tab4:
 
         #Public Call Demand Data
             transformed_data = [
-            {"t": row["Hour"] * 60, "mean_iat": row["Average Calls"] / 60}
+            {"t": row["Hour"] * 60, "mean_iat": 60 / row["Average Calls"]}
             for _, row in edited_public_df.iterrows() ]
             public_demand_df = pd.DataFrame(transformed_data)
 
         #Professuional Call Demand Data   
             transformed_prof = [
-            {"t": row["Hour"] * 60, "mean_iat": row["Average Calls"] / 60}
+            {"t": row["Hour"] * 60, "mean_iat": 60 / row["Average Calls"]}
             for _, row in edited_prof_df.iterrows() ]
             prof_demand_df = pd.DataFrame(transformed_prof)
 
