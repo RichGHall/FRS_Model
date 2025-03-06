@@ -85,11 +85,11 @@ with tab0:
             st.write("Chance of calling back following a successful call ?")
             pub_cb_han = st.slider(
                                     "Public Call Back Probability Handled",
-                                    min_value=0.0,    # float
-                                    max_value=1.0,    # float
-                                    value=0.01,       # float
-                                    step=0.01         # float
-                                )
+                                    min_value=0,    # float
+                                    max_value=100,    # float
+                                    value=1,       # float
+                                    step=1         # float
+                                )/100
     
             st.write(" ")
             st.divider()
@@ -97,11 +97,11 @@ with tab0:
             st.write("Chance of calling back following an unsuccessful call ?")
             pub_cb_abd = st.slider(
                                     "Public Call Back Probability Abandoned",
-                                    min_value=0.0,    # float
-                                    max_value=1.0,    # float
-                                    value=0.01,       # float
-                                    step=0.01         # float
-                )
+                                    min_value=0,    # float
+                                    max_value=100,    # float
+                                    value=1,       # float
+                                    step=1         # float
+                )/100
 
         with subcol2:
             st.subheader("")
@@ -122,14 +122,14 @@ with tab0:
 
             st.markdown("##### Call Back Probability - Handled Calls")
             st.write("Chance of calling back following a successful call ?")
-            pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01,step=0.01)
+            pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=100,value=1,step=1)
 
             st.write(" ")
             st.divider() 
 
             st.markdown("##### Call Back Probability - Abandoned Calls")
             st.write("Chance of calling back following an unsuccessful call ?")
-            pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
+            pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=100,value=1,step=1) / 100
 
 
         st.divider()
