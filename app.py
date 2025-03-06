@@ -86,7 +86,7 @@ with tab0:
                                     "Callback probability - handled calls",
                                     min_value=0,    # float
                                     max_value=100,    # float
-                                    value=g.call_back_prob_handled*100,       # float
+                                    value=round(g.call_back_prob_handled*100),       # float
                                     step=1         # float
                                 )/100
     
@@ -98,7 +98,7 @@ with tab0:
                                     "Callback probability - abandoned calls",
                                     min_value=0,    # float
                                     max_value=100,    # float
-                                    value=g.call_back_prob_abd*100,       # float
+                                    value=round(g.call_back_prob_abd*100),       # float
                                     step=1         # float
                 )/100
 
