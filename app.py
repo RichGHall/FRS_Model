@@ -113,34 +113,50 @@ with tab0:
         #    st.write("How long will calls last ?")
         #    pub_call_len = st.slider("Prof Call Length (minutes)",min_value=0,max_value=60,value=1)   
 
-            st.text("Write Up Time")
+            st.markdown("##### Write Up Time") 
             st.write("How much time is spent on post-call admin ?")
             pub_work_len = st.slider("Prof Work Length (minutes)",min_value=0,max_value=60,value=g.mean_prof_work)
 
-            st.text("Call Back Probability - Handled Calls")
+            st.write(" ")
+            st.divider() 
+
+            st.markdown("##### Call Back Probability - Handled Calls")
             st.write("Chance of calling back following a successful call ?")
-            #pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01,step=0.01)
-        
-            st.text("Call Back Probability - Abandoned Calls")
+            pub_cb_han = st.slider("Prof Call Back Probability Handled",min_value=0,max_value=1,value=0.01,step=0.01)
+
+            st.write(" ")
+            st.divider() 
+
+            st.markdown("##### Call Back Probability - Abandoned Calls")
             st.write("Chance of calling back following an unsuccessful call ?")
-            #pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
+            pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
 
 
         st.divider()
-        st.markdown("## Other {#4-Other}")
+        st.markdown("## Other Variable")
         
 
         ## description of the tab and how to use it
         st.subheader("Other Variables")
         st.write("Use this page to change other model variables")
 
-        st.subheader("No. Runs")
+        st.markdown("##### No. Runs")
         st.write("How many times will you loop through the model ?")
         no_runs = st.slider("Number of model runs",min_value=0,max_value=100,value=40)   
 
+        st.write(" ")
+        st.divider()
+
+        st.markdown("##### Demand Variance")
+        st.write("Adjusting the standard deviation for the demand distribution calculation can add more 'randomness' to then levels of demand")
+        st.write("A higher value will increase the variance in the number of calls per hour")
+        st.write("")
+        public_var = st.slider("Public Demand St Dev",min_value=0,max_value=30,value=g.public_arr_sd) 
+        public_var = st.slider("Professional Demand St Dev",min_value=0,max_value=30,value=g.public_arr_sd) 
 
 
-        st.markdown("### Run the model {#5-Run}")
+
+        st.markdown("#### Run the model ")
 
         st.header("Run")
         st.write("Use the button below to run the model")
