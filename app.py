@@ -73,18 +73,17 @@ with tab0:
 #            st.write("How long will calls last ?")
 #            pub_call_len = st.slider("Public Call Length (minutes)",min_value=0,max_value=60,value=1)   
             
-            st.write(" ")
-            st.divider() 
-            st.text("Write Up Time")
+
+            st.markdown("##### Write Up Time")
             st.write("How much time is spent on post-call admin ?")
-            pub_work_len = st.slider("Public Work Length (minutes)",min_value=0,max_value=60,value=g.mean_public_work)
+            pub_work_len = st.slider("Average Admin time - Public Calls",min_value=0,max_value=60,value=g.mean_public_work)
             
             st.write(" ")
             st.divider() 
-            st.text("Call Back Probability - Handled Calls")
+            st.markdown("##### Call Back Probability - Handled Calls")
             st.write("Chance of calling back following a successful call ?")
             pub_cb_han = st.slider(
-                                    "Public Call Back Probability Handled",
+                                    "Callback probability - handled calls",
                                     min_value=0,    # float
                                     max_value=100,    # float
                                     value=1,       # float
@@ -93,10 +92,10 @@ with tab0:
     
             st.write(" ")
             st.divider()
-            st.text("Call Back Probability - Abandoned Calls")
+            st.markdown("##### Call Back Probability - Abandoned Calls")
             st.write("Chance of calling back following an unsuccessful call ?")
             pub_cb_abd = st.slider(
-                                    "Public Call Back Probability Abandoned",
+                                    "Callback probability - abandoned calls",
                                     min_value=0,    # float
                                     max_value=100,    # float
                                     value=1,       # float
