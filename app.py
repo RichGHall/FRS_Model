@@ -24,7 +24,7 @@ with tab0:
         st.header("The Model")
         st.write("Use this section to .")
 
-        st.markdown("### Demand")
+        st.markdown("## Demand")
 
         st.write("Use the grids below to update the expected number of calls per hour.")
         st.write("This should be new callers only, the model will calcuate whether they will call back or not")
@@ -44,7 +44,9 @@ with tab0:
             prof_df = pd.read_csv("https://raw.githubusercontent.com/RichGHall/FRS_Model/main/files/Prof_Av_Calls.csv")  
             edited_prof_df = st.data_editor(prof_df, num_rows=24)
 
-        st.markdown("### Staffing Levels")
+
+        st.divider()
+        st.markdown("## Staffing Levels")
 
         st.write("Use the grid below to update the number of staff on shift per hour")
         
@@ -57,22 +59,23 @@ with tab0:
             
             df_staff_edited = st.data_editor(df_staff_renamed, num_rows=24) 
 
-
-        st.markdown("### Call Details")
+        st.divider()
+        st.markdown("## Call Details")
         st.write("This section updates the call details")
 
-        subcol1,subcol2 = st.columns(2)
+        subcol1,subcol2,subcol3 = st.columns(3)
         
         with subcol1:
 
             st.subheader("Public Callers")
-            st.text("Talk Time")
-            st.write("How long will calls last ?")
-            pub_call_len = st.slider("Public Call Length (minutes)",min_value=0,max_value=60,value=1)   
+#            st.text("Talk Time")
+#            st.write("How long will calls last ?")
+#            pub_call_len = st.slider("Public Call Length (minutes)",min_value=0,max_value=60,value=1)   
 
             st.text("Write Up Time")
             st.write("How much time is spent on post-call admin ?")
-            pub_work_len = st.slider("Public Work Length (minutes)",min_value=0,max_value=60,value=1)
+            pub_work_len = st.slider("Public Work Length (minutes)",min_value=0,max_value=60,value=g.mean_public_work)
+
 
             st.text("Call Back Probability - Handled Calls")
             st.write("Chance of calling back following a successful call ?")
@@ -94,17 +97,19 @@ with tab0:
                                     step=0.01         # float
                 )
 
-
         with subcol2:
+            st.subheader("")
+
+        with subcol3:
             st.subheader("Professional Callers")
                 
-            st.text("Talk Time")
-            st.write("How long will calls last ?")
-            pub_call_len = st.slider("Prof Call Length (minutes)",min_value=0,max_value=60,value=1)   
+        #    st.text("Talk Time")
+        #    st.write("How long will calls last ?")
+        #    pub_call_len = st.slider("Prof Call Length (minutes)",min_value=0,max_value=60,value=1)   
 
             st.text("Write Up Time")
             st.write("How much time is spent on post-call admin ?")
-            pub_work_len = st.slider("Prof Work Length (minutes)",min_value=0,max_value=60,value=1)
+            pub_work_len = st.slider("Prof Work Length (minutes)",min_value=0,max_value=60,value=g.mean_prof_work)
 
             st.text("Call Back Probability - Handled Calls")
             st.write("Chance of calling back following a successful call ?")
@@ -114,7 +119,9 @@ with tab0:
             st.write("Chance of calling back following an unsuccessful call ?")
             #pub_cb_abd = st.slider("Prof Call Back Probability Abd",min_value=0,max_value=1,value=0.01,step=0.01)
 
-        st.markdown("### Other {#4-Other}")
+
+        st.divider()
+        st.markdown("## Other {#4-Other}")
         
 
         ## description of the tab and how to use it
