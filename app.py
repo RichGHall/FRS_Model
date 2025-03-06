@@ -58,7 +58,8 @@ with tab0:
             df_staff_renamed["Hour"] =  df_staff_renamed["Hour"] / 60
             
             df_staff_edited = st.data_editor(df_staff_renamed, num_rows=24) 
-
+        
+        st.write(" ")
         st.divider()
         st.markdown("## Call Details")
         st.write("This section updates the call details")
@@ -71,12 +72,15 @@ with tab0:
 #            st.text("Talk Time")
 #            st.write("How long will calls last ?")
 #            pub_call_len = st.slider("Public Call Length (minutes)",min_value=0,max_value=60,value=1)   
-
+            
+            st.write(" ")
+            st.divider() 
             st.text("Write Up Time")
             st.write("How much time is spent on post-call admin ?")
             pub_work_len = st.slider("Public Work Length (minutes)",min_value=0,max_value=60,value=g.mean_public_work)
-
-
+            
+            st.write(" ")
+            st.divider() 
             st.text("Call Back Probability - Handled Calls")
             st.write("Chance of calling back following a successful call ?")
             pub_cb_han = st.slider(
@@ -87,6 +91,8 @@ with tab0:
                                     step=0.01         # float
                                 )
     
+            st.write(" ")
+            st.divider()
             st.text("Call Back Probability - Abandoned Calls")
             st.write("Chance of calling back following an unsuccessful call ?")
             pub_cb_abd = st.slider(
