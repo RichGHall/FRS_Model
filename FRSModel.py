@@ -155,8 +155,8 @@ class g:
     cb_len_abd_prof = 8.57
     cb_sd_abd_prof = 11.826
    
-
-
+    public_arr_sd = 1
+    prof_arr_sd =  0.02
 
 
 # Class representing public callers to the FRS Service.  There are public callers (members of the general public) and professional callers (GPs, Ambulance, Police etc) in Norfolk these are handled differently.
@@ -212,27 +212,8 @@ class Model:
         self.call_queue = simpy.PriorityStore(self.env) 
         self.juniors = simpy.Resource(self.env, capacity=g.number_of_junior)
         self.seniors = simpy.Resource(self.env, capacity=g.number_of_senior)
-   
-
-            
-
-
-
-    #    self.arrivals_public_time_dep_df = arrivals_public_time_dep_df
-        
- #       self.arrivals_public_dist = NSPPThinning(       ##NEW
- #           data= g.arrivals_public_time_dep_df,
- #           random_seed1= run_number * 42,
- #           random_seed2= run_number * 88
- #       )
-
- #       self.arrivals_prof_dist = NSPPThinning(       ##NEW
- #           data= g.arrivals_prof_time_dep_df,
- #           random_seed1= run_number * 42,
- #           random_seed2= run_number * 88
- #       )
-
-
+ 
+         
         self.run_number = run_number
 
         # DataFrame to store call details
@@ -352,9 +333,7 @@ class Model:
  #               #sampled_inter = self.arrivals_public_dist.sample(simulation_time=self.env.now)
  #               sampled_inter = Lognormal(self.public_arr_log,1).sample()
 
-            sampled_inter = Lognormal(self.public_arr_log,1).sample()
-            
-            
+            sampled_inter = Lognormal(self.public_arr_log,g.public_arr_sd).sample()            
             call.patience = Lognormal(g.public_patience,g.public_pat_sd).sample()
             
             yield self.call_queue.put(call)
@@ -376,7 +355,7 @@ class Model:
                 sampled_inter = Lognormal(self.prof_arr_log,0.2).sample()   
             else:
 #                sampled_inter = self.arrivals_prof_dist.sample(simulation_time=self.env.now)         
-                sampled_inter = Lognormal(self.prof_arr_log,0.2).sample()   
+                sampled_inter = Lognormal(self.prof_arr_log,g.prof_arr_sd).sample()   
 
             call.patience = random.expovariate(1 / g.prof_patience)
 
@@ -423,10 +402,10 @@ class Model:
                 
                 
                 else:
+
+                       
                     talk_time = erlang.rvs(g.public_talk_shape, g.public_talk_rate) 
-                    #work_time = erlang.rvs(g.public_work_shape, g.public_work_rate) 
-                   
-                   
+                    #work_time = erlang.rvs(g.public_work_shape, g.public_work_rate)                   
                     work_time = Lognormal(g.mean_public_work,g.sd_public_work).sample() +5
                     
                                             
